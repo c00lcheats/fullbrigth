@@ -1,70 +1,39 @@
---// Anti-detection & getgenv
 if not getgenv then return end
-local fullbrightOn = false
-local lighting = game:GetService("Lighting")
+local a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r=Drawing.new,Vector2.new,Color3.fromRGB,Color3.new,game:GetService,workspace.CurrentCamera.ViewportSize,math.random,pcall,getgc,islclosure,is_synapse_function,hookfunction,type,Enum.UserInputType,("FB"),("ON"),0.4,true
+local s,t,u,v=w,h,b,c
+local w,x,y,z,A,B,C,D,E,F,G,H,I,J=100,100,f("Lighting"),false,a("Circle"),b(100,f().Y-100),30,e(255,255,0),d(1,1,1),10,12,1,14,1000
+B.Position,C.Radius,C.Color,C.Filled,C.Transparency,C.Visible=w,30,E,true,0.4,true
+local K=a("Text")
+K.Position=E-b(15,8) K.Text=H K.Size=16 K.Color=d(1,1,1) K.Center=false K.Outline=true K.Visible=true
 
---// Setup Drawing GUI Bulat
-local button = Drawing.new("Circle")
-button.Position = Vector2.new(100, workspace.CurrentCamera.ViewportSize.Y - 100)
-button.Radius = 30
-button.Color = Color3.fromRGB(255, 255, 0)
-button.Filled = true
-button.Transparency = 0.4
-button.Visible = true
-
-local buttonText = Drawing.new("Text")
-buttonText.Position = button.Position - Vector2.new(15, 8)
-buttonText.Text = "FB"
-buttonText.Size = 16
-buttonText.Color = Color3.new(1,1,1)
-buttonText.Center = false
-buttonText.Outline = true
-buttonText.Visible = true
-
---// FullBright Function
-local function applyFullbright()
-    lighting.Ambient = Color3.new(1,1,1)
-    lighting.OutdoorAmbient = Color3.new(1,1,1)
-    lighting.Brightness = 10
-    lighting.ClockTime = 12
-    lighting.FogEnd = 1000000
+local function L()
+    y.Ambient,d.Ambient,y.OutdoorAmbient,y.Brightness,y.ClockTime,y.FogEnd=G,G,G,F,I,H
 end
 
-local function resetFullbright()
-    lighting.Ambient = Color3.new(0,0,0)
-    lighting.OutdoorAmbient = Color3.new(0,0,0)
-    lighting.Brightness = 1
-    lighting.ClockTime = 14
-    lighting.FogEnd = 1000
+local function M()
+    y.Ambient,y.OutdoorAmbient,y.Brightness,y.ClockTime,y.FogEnd=d(0,0,0),d(0,0,0),J,J,K
 end
 
---// Toggle Handler
-local uis = game:GetService("UserInputService")
-uis.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        local mousePos = uis:GetMouseLocation()
-        local dist = (mousePos - button.Position).Magnitude
-        if dist <= button.Radius then
-            fullbrightOn = not fullbrightOn
-            if fullbrightOn then
-                applyFullbright()
-                button.Color = Color3.fromRGB(0, 255, 0)
-                buttonText.Text = "ON"
+local N=e("UserInputService")
+N.InputBegan:Connect(function(O)
+    if O.UserInputType==c.MouseButton1 then
+        local P=N:GetMouseLocation()
+        local Q=(P-C.Position).Magnitude
+        if Q<=C.Radius then
+            z=not z
+            if z then
+                L() C.Color=d(0,255,0) K.Text=I
             else
-                resetFullbright()
-                button.Color = Color3.fromRGB(255, 255, 0)
-                buttonText.Text = "FB"
+                M() C.Color=E K.Text=H
             end
         end
     end
 end)
 
---// Anti-Detection Hide Technique
-pcall(function()
-    for _,v in pairs(getgc(true)) do
-        if type(v) == "function" and islclosure(v) and not is_synapse_function(v) then
-            -- prevent anticheat functions from seeing this
-            hookfunction(v, function(...) return nil end)
+g(function()
+    for R,S in pairs(h(true)) do
+        if j(S) and not k(S) then
+            l(S,function(...) return nil end)
         end
     end
 end)
